@@ -5,6 +5,7 @@ from aiogram.dispatcher.storage import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from aiogram.utils import executor
+from middleware import SubscriptionMiddleware
 from constants import TOKEN, CHANNEL_ID, ADMIN_ID
 from keyboards import (subscribe_keyboard,
                        main_keyboard,
@@ -64,6 +65,8 @@ error_messages = {}
 administrators = {
     "developer": ADMIN_ID
 }
+
+dp.middleware.setup(SubscriptionMiddleware(CHANNEL_ID, subscribe_keyboard))
 
 async def check_subscription_start(user_id):
     try:
