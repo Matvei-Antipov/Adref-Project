@@ -1324,7 +1324,10 @@ async def back_to_main_menu(callback_query: CallbackQuery):
     )
 
 #boot
+async def main():
+    await bot.delete_webhook(drop_pending_updates=True)
+    await bot.get_updates(offset=-1)
+    await dp.start_polling(bot, drop_pending_updates=True)
+
 if __name__ == "__main__":
-  await bot.delete_webhook(drop_pending_updates=True)
-  await bot.get_updates(offset=-1)
-  await dp.start_polling(bot, drop_pending_updates=True)
+    asyncio.run(main())
